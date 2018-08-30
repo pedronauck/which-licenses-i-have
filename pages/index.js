@@ -45,13 +45,15 @@ export default withRouter(({ router: { query, push, ...router } }) => {
     push(`/${name}`)
   }
 
+  const { scope, name } = query;
+  const packageName = scope ? `${scope}/${name}` : name;
   return (
     <Wrapper>
       <Title>Which licenses I have?</Title>
       <Subtitle>Learn about the licenses around your package</Subtitle>
       <AsyncFetcher
         autoFetch={false}
-        url={`https://deps-service-bymhrnqeqs.now.sh/${query.name}`}
+        url={`https://deps-service-bymhrnqeqs.now.sh/${packageName}`}
       >
         {({ fetch, ...props }) => (
           <Component
@@ -61,7 +63,7 @@ export default withRouter(({ router: { query, push, ...router } }) => {
           >
             {() => (
               <Fragment>
-                <Form initialValue={query.name} onSubmit={handleSubmit} />
+                <Form initialValue={packageName} onSubmit={handleSubmit} />
                 <Licenses {...props} />
               </Fragment>
             )}

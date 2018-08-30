@@ -8,7 +8,7 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 const route = pathMatch()
-const match = route('/:name')
+const match = route('/:scope?/:name')
 
 app.prepare().then(() => {
   createServer((req, res) => {
