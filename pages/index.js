@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react'
 import styled from 'react-emotion'
 import AsyncFetcher from 'react-async-fetcher'
+import { withRouter } from 'next/router'
+import Component from '@reach/component-component'
 
-import { Form, state } from './components/Form'
+import { Form } from './components/Form'
 import { Licenses } from './components/Licenses'
 
 const Wrapper = styled('div')`
@@ -28,29 +30,38 @@ const Subtitle = styled(Title.withComponent('h2'))`
   color: deeppink;
 `
 
-export default () => {
-  const handleSubmit = fetch => ev => {
+export default withRouter(({ router: { query, push } }) => {
+  const handleSubmit = pkg => ev => {
     ev.preventDefault()
-    fetch()
+    push(`/${pkg}`)
   }
 
   return (
     <Wrapper>
       <Title>Which licenses I have?</Title>
       <Subtitle>Learn about the licenses around your package</Subtitle>
-      {state.get(s => (
-        <AsyncFetcher
-          autoFetch={false}
-          url={`https://deps-service-bymhrnqeqs.now.sh/${s.text}`}
-        >
-          {({ fetch, ...props }) => (
-            <Fragment>
-              <Form onSubmit={handleSubmit(fetch)} />
-              <Licenses {...props} />
-            </Fragment>
-          )}
-        </AsyncFetcher>
-      ))}
+      <AsyncFetcher
+        autoFetch={false}
+        url={`https://deps-service-bymhrnqeqs.now.sh/${query.name}`}
+      >
+        {({ fetch, ...props }) => (
+          <Component
+            didMount={() => {
+              if (query.name && query.name.length > 0) fetch()
+            }}
+          >
+            {() => (
+              <Fragment>
+                <Form
+                  initialValue={query.name}
+                  onSubmit={val => handleSubmit(val)}
+                />
+                <Licenses {...props} />
+              </Fragment>
+            )}
+          </Component>
+        )}
+      </AsyncFetcher>
     </Wrapper>
   )
-}
+})

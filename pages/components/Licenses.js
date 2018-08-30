@@ -34,7 +34,7 @@ const Small = styled('div')`
 `
 
 const Wrapper = styled('div')`
-  margin: ${MARGIN} 0;
+  margin: ${MARGIN} 0 80px 0;
 `
 
 const ItemWrapper = styled('div')`
@@ -96,13 +96,13 @@ const Text = styled('p')`
 const getLicensesName = R.pipe(
   R.path(['licenseSources', 'package', 'sources']),
   R.defaultTo([]),
-  R.map(R.prop('license')),
+  R.map(R.prop('license'))
 )
 
 const getLicensesText = R.pipe(
   R.path(['licenseSources', 'license', 'sources']),
   R.defaultTo([]),
-  R.map(R.prop('text')),
+  R.map(R.prop('text'))
 )
 
 const Item = ({ selected, item }) => {

@@ -44,16 +44,16 @@ export const state = create({
   text: '',
 })
 
-export const Form = ({ onSubmit }) => (
+export const Form = ({ initialValue, onSubmit }) => (
   <Component
     didMount={() => inputRef.current.focus()}
     render={() =>
       state.get(s => (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={() => onSubmit(s.text)}>
           <InputWrapper>
             <Input
               innerRef={inputRef}
-              value={s.text}
+              value={initialValue || s.text}
               placeholder="Your package name..."
               onChange={ev => state.set({ text: ev.target.value })}
             />

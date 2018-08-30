@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@reach/component-component": "^0.1.0",
@@ -15,6 +15,7 @@
     "emotion": "^9.2.8",
     "emotion-server": "^9.2.8",
     "next": "^6.1.1",
+    "path-match": "^1.2.4",
     "ramda": "^0.25.0",
     "react": "^16.4.2",
     "react-async-fetcher": "^1.0.1",
