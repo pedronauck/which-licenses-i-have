@@ -44,7 +44,7 @@ const Svg = styled('svg')`
 
 export const GithubLink = () => (
   <Link
-    href="https://github.com/pedronauck/which-licences-i-have"
+    href="https://github.com/pedronauck/which-licenses-i-have"
     target="_blank"
     aria-label="View source on Github"
   >
