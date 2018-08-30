@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://cdn-std.dprcdn.net/files/acc_649651/wUrkVT" />
+  <img src="https://cdn-std.dprcdn.net/files/acc_649651/M9XcuU" />
 </p>
 
 ### [Visit the website](http://which-licenses-i-have.now.sh)
