@@ -22,8 +22,8 @@ const Input = styled('input')`
 `
 
 const SearchIcon = styled(Search)`
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   stroke: deeppink;
   stroke-width: 2px;
 `
@@ -31,7 +31,7 @@ const SearchIcon = styled(Search)`
 const SearchButton = styled('button')`
   position: absolute;
   top: 50%;
-  right: 0;
+  right: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
