@@ -4,6 +4,7 @@ import styled, { injectGlobal } from 'react-emotion'
 import ScaleLoader from 'react-spinners/ScaleLoader'
 import Component from '@reach/component-component'
 import { Dialog as BaseDialog } from '@reach/dialog'
+import { withRouter } from 'next/router'
 import X from 'react-feather/dist/icons/x'
 
 import '@reach/dialog/styles.css'
@@ -23,7 +24,7 @@ injectGlobal`
 
 const MARGIN = '50px'
 
-const Loading = styled('div')`
+const Centering = styled('div')`
   margin: ${MARGIN} 0;
   text-align: center;
   font-size: 30px;
@@ -59,6 +60,10 @@ const ItemWrapper = styled('div')`
 const Name = styled('div')`
   flex: 1;
   padding: 20px;
+
+  a {
+    color: white;
+  }
 
   @media screen and (max-width: 460px) {
     padding: 10px;
@@ -133,7 +138,7 @@ const getLicensesText = R.pipe(
   R.map(R.prop('text'))
 )
 
-const Item = ({ selected, item }) => {
+const Item = withRouter(({ router, item }) => {
   const name = R.prop('name', item)
   const version = R.prop('version', item)
   const licensesNames = getLicensesName(item)
@@ -142,15 +147,29 @@ const Item = ({ selected, item }) => {
   return (
     <ItemWrapper>
       <Name>
-        {name}
+        <a
+          href="#"
+          onClick={ev => {
+            router.push(`/${name}`)
+            ev.preventDefault()
+          }}
+        >
+          {name}
+        </a>
         <Version>@{version}</Version>
       </Name>
       <Component initialState={{ showDialog: false }}>
         {({ state, setState }) => (
           <LicenseList>
             {licensesNames.map((license, i) => (
-              <Fragment key={license}>
-                <a href="#" onClick={() => setState({ showDialog: true })}>
+              <Fragment key={`${license}-${i}`}>
+                <a
+                  href="#"
+                  onClick={ev => {
+                    setState({ showDialog: true })
+                    ev.preventDefault()
+                  }}
+                >
                   {license}
                 </a>
                 <Dialog isOpen={state.showDialog}>
@@ -171,23 +190,30 @@ const Item = ({ selected, item }) => {
       </Component>
     </ItemWrapper>
   )
-}
+})
 
-export const Licenses = ({ isLoading, error, data }) => {
+export const Licenses = ({ isLoading, error, data, response }) => {
   if (isLoading) {
     return (
-      <Loading>
+      <Centering>
         <ScaleLoader size={120} color="white" loading />
         <Small>This may take a while...</Small>
-      </Loading>
+      </Centering>
     )
   }
 
+  if (response && !response.data.length) {
+    return <Centering>No results found</Centering>
+  }
+
   return (
-    <Wrapper>
-      {data &&
-        data.length > 0 &&
-        data.map(item => <Item key={item.id} item={item} selected={''} />)}
-    </Wrapper>
+    data &&
+    data.length > 0 && (
+      <Wrapper>
+        {data &&
+          data.length > 0 &&
+          data.map(item => <Item key={item.id} item={item} selected={''} />)}
+      </Wrapper>
+    )
   )
 }
