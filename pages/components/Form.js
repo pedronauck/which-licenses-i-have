@@ -4,18 +4,18 @@ import Component from '@reach/component-component'
 import Search from 'react-feather/dist/icons/search'
 
 const InputWrapper = styled('div')`
+  position: relative;
   display: flex;
   align-items: center;
-  padding-left: 65px;
 `
 
 const Input = styled('input')`
   outline: 1px solid deeppink;
   outline: none;
-  padding: 20px;
+  padding: 20px 45px 20px 20px;
   border: none;
   background: white;
-  min-width: 280px;
+  max-width: 220px;
   font-size: 24px;
   font-weight: 300;
   color: #333;
@@ -24,17 +24,21 @@ const Input = styled('input')`
 const SearchIcon = styled(Search)`
   width: 35px;
   height: 35px;
-  stroke: white;
+  stroke: deeppink;
   stroke-width: 2px;
 `
 
 const SearchButton = styled('button')`
+  position: absolute;
+  top: 50%;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 15px;
   background: none;
   border: none;
+  transform: translateY(-50%);
 `
 
 const inputRef = React.createRef()
@@ -49,7 +53,7 @@ export const Form = ({ initialValue, onSubmit }) => (
           <Input
             innerRef={inputRef}
             value={state.text}
-            placeholder="Your package name..."
+            placeholder="Type package name..."
             onChange={ev => setState({ text: ev.target.value })}
           />
           <SearchButton type="submit">

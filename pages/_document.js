@@ -21,6 +21,17 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <title>Which licenses I have?</title>
+          <meta charset="UTF-8" />
+          <meta
+            name="description"
+            content="Learn about the licenses around your package
+          "
+          />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
           <link
             href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:300,400,700"

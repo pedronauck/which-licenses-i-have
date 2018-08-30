@@ -10,6 +10,7 @@ import '@reach/dialog/styles.css'
 
 injectGlobal`
   [data-reach-dialog-overlay] {
+    z-index: 9999;
     background: hsla(0, 0%, 0%, 0.5);
     position: fixed;
     top: 0;
@@ -23,7 +24,7 @@ injectGlobal`
 const MARGIN = '50px'
 
 const Loading = styled('div')`
-  margin-top: ${MARGIN};
+  margin: ${MARGIN} 0;
   text-align: center;
   font-size: 30px;
 `
@@ -35,20 +36,33 @@ const Small = styled('div')`
 
 const Wrapper = styled('div')`
   margin: ${MARGIN} 0 80px 0;
+
+  @media screen and (max-width: 460px) {
+    min-width: calc(100% - 30px);
+    margin-bottom: 40px;
+  }
 `
 
 const ItemWrapper = styled('div')`
   display: flex;
   align-items: center;
   width: 100%;
-  min-width: 320px;
+  min-width: 100%;
   margin-top: -1px;
   border: 1px dashed white;
+
+  @media screen and (max-width: 460px) {
+    font-size: 16px;
+  }
 `
 
 const Name = styled('div')`
   flex: 1;
   padding: 20px;
+
+  @media screen and (max-width: 460px) {
+    padding: 10px;
+  }
 `
 
 const Version = styled('span')`
@@ -65,6 +79,10 @@ const LicenseList = styled('div')`
     color: deeppink;
     text-decoration: none;
   }
+
+  @media screen and (max-width: 460px) {
+    padding: 10px;
+  }
 `
 
 const CloseButton = styled('span')`
@@ -80,6 +98,7 @@ const CloseButton = styled('span')`
 const Dialog = styled(BaseDialog)`
   position: relative;
   width: 50vw;
+  max-width: 100vw;
   margin: 10vh auto;
   background: white;
   padding: 1rem 2rem 1rem 1.5rem;
@@ -87,6 +106,15 @@ const Dialog = styled(BaseDialog)`
   font-family: 'IBM Plex Mono', monospace;
   font-size: 14px;
   color: black;
+
+  @media screen and (min-width: 520px) and (max-width: 1200px) {
+    width: 80vw;
+  }
+
+  @media screen and (max-width: 520px) {
+    width: 100vw;
+    margin: 0;
+  }
 `
 
 const Text = styled('p')`

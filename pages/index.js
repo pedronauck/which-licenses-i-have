@@ -16,10 +16,15 @@ const Wrapper = styled('div')`
 `
 
 const Title = styled('h1')`
-  margin: 0;
+  margin: 0 10px;
   font-size: 50px;
   font-weight: 300;
   letter-spacing: -0.03em;
+  text-align: center;
+
+  @media screen and (max-width: 460px) {
+    font-size: 46px;
+  }
 `
 
 const Subtitle = styled(Title.withComponent('h2'))`
@@ -28,6 +33,10 @@ const Subtitle = styled(Title.withComponent('h2'))`
   font-weight: 300px;
   letter-spacing: -0.03em;
   color: deeppink;
+
+  @media screen and (max-width: 460px) {
+    font-size: 24px;
+  }
 `
 
 export default withRouter(({ router: { query, push, ...router } }) => {
