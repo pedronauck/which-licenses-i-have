@@ -1,0 +1,27 @@
+{
+  "name": "deps-website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@reach/component-component": "^0.1.0",
+    "@reach/dialog": "^0.1.0",
+    "babel-plugin-emotion": "^9.2.8",
+    "emotion": "^9.2.8",
+    "emotion-server": "^9.2.8",
+    "next": "^6.1.1",
+    "ramda": "^0.25.0",
+    "react": "^16.4.2",
+    "react-async-fetcher": "^1.0.1",
+    "react-dom": "^16.4.2",
+    "react-emotion": "^9.2.8",
+    "react-feather": "^1.1.1",
+    "react-spinners": "^0.4.5",
+    "reworm": "^1.0.4"
+  }
+}
