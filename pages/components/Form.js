@@ -1,8 +1,7 @@
 import React from 'react'
-import { Search } from 'react-feather'
-import { create } from 'reworm'
-import Component from '@reach/component-component'
 import styled from 'react-emotion'
+import Component from '@reach/component-component'
+import Search from 'react-feather/dist/icons/search'
 
 const InputWrapper = styled('div')`
   display: flex;
@@ -40,29 +39,24 @@ const SearchButton = styled('button')`
 
 const inputRef = React.createRef()
 
-export const state = create({
-  text: '',
-})
-
 export const Form = ({ initialValue, onSubmit }) => (
   <Component
+    initialState={{ text: initialValue }}
     didMount={() => inputRef.current.focus()}
-    render={() =>
-      state.get(s => (
-        <form onSubmit={() => onSubmit(s.text)}>
-          <InputWrapper>
-            <Input
-              innerRef={inputRef}
-              value={initialValue || s.text}
-              placeholder="Your package name..."
-              onChange={ev => state.set({ text: ev.target.value })}
-            />
-            <SearchButton type="submit">
-              <SearchIcon />
-            </SearchButton>
-          </InputWrapper>
-        </form>
-      ))
-    }
+    render={({ state, setState }) => (
+      <form onSubmit={ev => onSubmit(ev, state.text)}>
+        <InputWrapper>
+          <Input
+            innerRef={inputRef}
+            value={state.text}
+            placeholder="Your package name..."
+            onChange={ev => setState({ text: ev.target.value })}
+          />
+          <SearchButton type="submit">
+            <SearchIcon />
+          </SearchButton>
+        </InputWrapper>
+      </form>
+    )}
   />
 )

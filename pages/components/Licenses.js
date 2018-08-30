@@ -3,10 +3,10 @@ import React, { Fragment } from 'react'
 import styled, { injectGlobal } from 'react-emotion'
 import ScaleLoader from 'react-spinners/ScaleLoader'
 import Component from '@reach/component-component'
-import { X } from 'react-feather'
 import { Dialog as BaseDialog } from '@reach/dialog'
+import X from 'react-feather/dist/icons/x'
 
-import { state } from './Form'
+import '@reach/dialog/styles.css'
 
 injectGlobal`
   [data-reach-dialog-overlay] {
@@ -121,7 +121,7 @@ const Item = ({ selected, item }) => {
         {({ state, setState }) => (
           <LicenseList>
             {licensesNames.map((license, i) => (
-              <Fragment>
+              <Fragment key={license}>
                 <a href="#" onClick={() => setState({ showDialog: true })}>
                   {license}
                 </a>
@@ -159,7 +159,7 @@ export const Licenses = ({ isLoading, error, data }) => {
     <Wrapper>
       {data &&
         data.length > 0 &&
-        data.map(item => <Item item={item} selected={''} />)}
+        data.map(item => <Item key={item.id} item={item} selected={''} />)}
     </Wrapper>
   )
 }

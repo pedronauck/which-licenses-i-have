@@ -30,10 +30,10 @@ const Subtitle = styled(Title.withComponent('h2'))`
   color: deeppink;
 `
 
-export default withRouter(({ router: { query, push } }) => {
-  const handleSubmit = pkg => ev => {
+export default withRouter(({ router: { query, push, ...router } }) => {
+  const handleSubmit = (ev, name) => {
     ev.preventDefault()
-    push(`/${pkg}`)
+    push(`/${name}`)
   }
 
   return (
@@ -52,10 +52,7 @@ export default withRouter(({ router: { query, push } }) => {
           >
             {() => (
               <Fragment>
-                <Form
-                  initialValue={query.name}
-                  onSubmit={val => handleSubmit(val)}
-                />
+                <Form initialValue={query.name} onSubmit={handleSubmit} />
                 <Licenses {...props} />
               </Fragment>
             )}
